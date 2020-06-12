@@ -9,13 +9,13 @@ face_cascade_name = "Cascades/haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(face_cascade_name)
 
 model = load_model("detector_model.h5")
-capture = cv2.VideoCapture('mask.mp4')
-#capture = cv2.VideoCapture(0)
+#capture = cv2.VideoCapture('mask.mp4')
+capture = cv2.VideoCapture(0)
 
 while (True):
     rat, frame = capture.read()
     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=4)
+    faces = face_cascade.detectMultiScale(gray_image, scaleFactor=1.2, minNeighbors=3)
     for (x, y, w, h) in faces:
         cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0))
         face = frame[y:y+h, x:x+w]
